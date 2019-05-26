@@ -7,10 +7,14 @@ from bson import json_util
 
 class DBConnection:
 
-    def __init__(self, address='localhost', port=27017):
+    def __init__(self, uri=None, address='localhost', port=27017):
 
         # Initialize connection to specified DB
-        self.client = MongoClient(address, port)
+        if not uri is None:
+            self.client = MongoClient(uri)
+        else:
+            self.client = MongoClient(address, port)
+
         if self.client is None:
             raise Exception("[ERROR] Failed to connect to database server")
 

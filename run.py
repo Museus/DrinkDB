@@ -5,7 +5,7 @@ import sys
 
 app = Flask(__name__)
 CORS(app)
-db_conn =  DBConnection()
+db_conn =  DBConnection(uri="mongodb+srv://AtlasRO:recipebookapi@jredding-recipebook-3cs5y.mongodb.net/test?retryWrites=true")
 
 @app.route('/')
 def index():
