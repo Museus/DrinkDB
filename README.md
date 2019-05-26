@@ -1,2 +1,2 @@
 # DrinkDB
-Flaskr REST API for RecipeBook app
+REST API for RecipeBook app built with Flask
