@@ -43,7 +43,8 @@ class DBConnection:
     def get_drink_by_name(self, drink_info):
         recipes = []
         regex = ".*" + str(drink_info.get('name')) + ".*"
-        for recipe in self.recipes.find({"name": {'$regex' : regex}}):
+        print("Searching for: "+ regex)
+        for recipe in self.recipes.find({"name": {'$regex' : regex, '$options' : "i"}}):
             recipes.append(recipe) 
         print(recipes)
         return json.dumps(recipes, indent=2, default=json_util.default)
