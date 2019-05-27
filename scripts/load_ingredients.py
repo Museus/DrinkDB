@@ -11,7 +11,7 @@ with open(filename, 'r') as input_file:
 
         ingredients_list.append({"label": ingredient.rstrip('\n'), "value": ingredient.rstrip('\n')})
 
-client = MongoClient()
+client = MongoClient("mongodb+srv://Museus:R3cipeDB@jredding-recipebook-3cs5y.mongodb.net/test?retryWrites=true")
 resources = client['RecipeBook'].resources
 
 recipe_id = resources.update_one(

@@ -51,17 +51,41 @@ class DBConnection:
     def get_drink_suggestion(self, ingr_include, ingr_exclude):
         drink_list = []
         incl_list = []
+        excl_list = []
+        request = {}
 
         # STOP UNDO
 
         for ingredient in ingr_include:
             incl_list.append({'ingredient': ingredient})
 
-        #incl_json = json.dumps(incl_list, indent=2, default=json_util.default)
-        #print(incl_json)
+        for ingredient in ingr_exclude:
+            excl_list.append({'ingredient': ingredient})
 
-        # Find recipe that matches ingredient
-        for recipe in self.recipes.find({"ingredients": {'$elemMatch': { '$or': incl_list}}}):
+
+        if excl_list:
+            request = {
+                    "ingredients": {
+                        '$elemMatch': { 
+                            '$or': incl_list
+                        }, '$not': { 
+                            '$elemMatch': {'$and' : excl_list}
+                        }
+                    }
+            };
+
+        else: 
+            request = {
+                    "ingredients": {
+                        '$elemMatch': {
+                            '$or': incl_list
+                            }
+                        }
+                    };
+
+        # Find recipe that matches ingredient specification
+        for recipe in self.recipes.find(request):
+
             drink_list.append(recipe)
 #
 #            # If the drink has been found before
