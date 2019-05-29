@@ -9,8 +9,7 @@ class DBConnection:
 
     def __init__(self, uri=None, address='localhost', port=27017):
 
-        #self.client = MongoClient("mongodb+srv://AtlasRO:recipebookapi@jredding-recipebook-3cs5y.mongodb.net/test?retryWrites=true")
-        self.client = MongoClient()
+        self.client = MongoClient("mongodb+srv://AtlasRO:recipebookapi@jredding-recipebook-3cs5y.mongodb.net/test?retryWrites=true")
 
         if self.client is None:
             raise Exception("[ERROR] Failed to connect to database server")
